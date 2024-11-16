@@ -1,0 +1,78 @@
+{
+	"compiler": {
+		"version": "0.8.28+commit.7893614a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_l1TokenAddress",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "retrieveShares",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"src/scroll/RstETHScroll.sol": "L1Reader"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": [
+			":@layerzerolabs/lz-evm-protocol-v2/=lib/layerzero-v2/packages/layerzero-v2/evm/protocol",
+			":@layerzerolabs/oapp-evm/=lib/devtools/packages/oapp-evm/",
+			":@layerzerolabs/oft-evm/=lib/devtools/packages/oft-evm/",
+			":@openzeppelin/=lib/openzeppelin-contracts/",
+			":ds-test/=lib/forge-std/lib/ds-test/src/",
+			":forge-std/=lib/forge-std/",
+			":lz-evm-messagelib/=lib/layerzero-v2/packages/layerzero-v2/evm/messagelib"
+		]
+	},
+	"sources": {
+		"src/scroll/RstETHScroll.sol": {
+			"keccak256": "0xc6420b668093eab41d81f3278fb190d558098ef69e124229666941a2ef0efba0",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://e82e57e80110849e8d0925c19b082ae581b3a7cccb5c215e878c57cba2acb1c2",
+				"dweb:/ipfs/QmbkrkFZpaTjDFX6vz7HsUBGZTGusNbG2cqxXjrLcPQL5v"
+			]
+		}
+	},
+	"version": 1
+}
