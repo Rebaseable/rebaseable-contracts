@@ -1,0 +1,235 @@
+{
+	"deploy": {
+		"VM:-": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"main:1": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"ropsten:3": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"rinkeby:4": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"kovan:42": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"goerli:5": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"Custom": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		}
+	},
+	"data": {
+		"bytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"deployedBytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"immutableReferences": {},
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"gasEstimates": null,
+		"methodIdentifiers": {
+			"getCmd()": "b10c7544",
+			"getOps(bytes)": "0e639870",
+			"getRebaseInfo(bytes)": "0631afeb",
+			"lastTotalShares()": "20212cb7",
+			"lastTotalSupply()": "b6508067",
+			"quote(uint32,bytes,bool)": "a1156fde",
+			"quoteWrite(uint32,bytes,bool)": "61a9a393",
+			"setReadChannel(uint32,bool)": "f0a9e481"
+		}
+	},
+	"abi": [
+		{
+			"inputs": [],
+			"name": "getCmd",
+			"outputs": [
+				{
+					"internalType": "bytes",
+					"name": "",
+					"type": "bytes"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes",
+					"name": "_extraOps",
+					"type": "bytes"
+				}
+			],
+			"name": "getOps",
+			"outputs": [
+				{
+					"internalType": "bytes",
+					"name": "",
+					"type": "bytes"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes",
+					"name": "_extraOps",
+					"type": "bytes"
+				}
+			],
+			"name": "getRebaseInfo",
+			"outputs": [],
+			"stateMutability": "payable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "lastTotalShares",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "lastTotalSupply",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint32",
+					"name": "_channelId",
+					"type": "uint32"
+				},
+				{
+					"internalType": "bytes",
+					"name": "_options",
+					"type": "bytes"
+				},
+				{
+					"internalType": "bool",
+					"name": "_payInLzToken",
+					"type": "bool"
+				}
+			],
+			"name": "quote",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "uint256",
+							"name": "nativeFee",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "lzTokenFee",
+							"type": "uint256"
+						}
+					],
+					"internalType": "struct IRstETH.MessagingFee",
+					"name": "fee",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint32",
+					"name": "_channelId",
+					"type": "uint32"
+				},
+				{
+					"internalType": "bytes",
+					"name": "_options",
+					"type": "bytes"
+				},
+				{
+					"internalType": "bool",
+					"name": "_payInLzToken",
+					"type": "bool"
+				}
+			],
+			"name": "quoteWrite",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "uint256",
+							"name": "nativeFee",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "lzTokenFee",
+							"type": "uint256"
+						}
+					],
+					"internalType": "struct IRstETH.MessagingFee",
+					"name": "fee",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint32",
+					"name": "_channelId",
+					"type": "uint32"
+				},
+				{
+					"internalType": "bool",
+					"name": "_active",
+					"type": "bool"
+				}
+			],
+			"name": "setReadChannel",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		}
+	]
+}

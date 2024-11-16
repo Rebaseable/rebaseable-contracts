@@ -1,0 +1,35 @@
+{
+	"language": "Solidity",
+	"settings": {
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"outputSelection": {
+			"*": {
+				"": [
+					"ast"
+				],
+				"*": [
+					"abi",
+					"metadata",
+					"devdoc",
+					"userdoc",
+					"storageLayout",
+					"evm.legacyAssembly",
+					"evm.bytecode",
+					"evm.deployedBytecode",
+					"evm.methodIdentifiers",
+					"evm.gasEstimates",
+					"evm.assembly"
+				]
+			}
+		},
+		"remappings": [
+			"ds-test/=lib/forge-std/lib/ds-test/src/",
+			"forge-std/=lib/forge-std/src/",
+			"@layerzerolabs/oapp-evm/=lib/devtools/packages/oapp-evm/",
+			"@layerzerolabs/lz-evm-protocol-v2/=lib/layerzero-v2/packages/layerzero-v2/evm/protocol"
+		]
+	}
+}

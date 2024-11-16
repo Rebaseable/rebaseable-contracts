@@ -1,0 +1,86 @@
+{
+	"compiler": {
+		"version": "0.8.28+commit.7893614a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "getTotalShares",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"src/mocks/MockStETH.sol": "MockStETH"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": [
+			":@layerzerolabs/lz-evm-protocol-v2/=lib/layerzero-v2/packages/layerzero-v2/evm/protocol",
+			":@layerzerolabs/oapp-evm/=lib/devtools/packages/oapp-evm/",
+			":@openzeppelin/=lib/openzeppelin-contracts/",
+			":ds-test/=lib/forge-std/lib/ds-test/src/",
+			":forge-std/=lib/forge-std/"
+		]
+	},
+	"sources": {
+		"src/external/IStETH.sol": {
+			"keccak256": "0x5674a09b8a951a30c9bf58acf17c5d5b6472a1f20998fb1e32e29998fd0a3e02",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d7fb2011567e34d31f7e1cabfd115761a6ae959405c59dedf6b2834a902d8337",
+				"dweb:/ipfs/QmP8gQ9CAf6hFWbAXpJiFj9M4EWugaVznLP7c7jwjaqQh5"
+			]
+		},
+		"src/mocks/MockStETH.sol": {
+			"keccak256": "0x4e01c9d1071038b7d369da63fc9d4c835c0b279d23d075e598c8dc2ef72b2236",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://15bb6d363724a0aaac2c15b01c314120b890580cfb1a794d0db449de4347009e",
+				"dweb:/ipfs/QmdvwY6wuwsnVEBbtqy15T2RntpF6Gj4Qfz3h7e5sfxQzA"
+			]
+		}
+	},
+	"version": 1
+}
