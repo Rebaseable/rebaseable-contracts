@@ -1,66 +1,30 @@
-## Foundry
+### Rebaseable contracts
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+Rebaseable is bringing rebasing staked tokens, starting with stETH, cross-chain.
 
-Foundry consists of:
+This repo encompasses multiple solutions around this problem spectrum. 
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## RstETH:
+Here we tried to get the balance updates from the mainnet stETH using `lzRead` from LayerZero. The code itself is complete but we could not deploy this to any chain because lzRead did not work properly. We were running into many errors with the DVNs and the executors when sending the `lzRead` call cross-chain.
 
-## Documentation
+`RstETH`: `0x8eE74Bfc34e7e2e257887d54a59DAD1b2BD80Cc3` (Base Sepolia Testnet - not working)
 
-https://book.getfoundry.sh/
+## RstETHOFT and stETHAdapter:
+These contracts use the OFT standard to accomplish cross-chain rebasing stETH. The `stETHAdapter` contract accepts users' stETH on mainnet and then send them cross-chain as OFT. The `RstETHOFT` contract is the cross-chain OFT. The rebasing info reaches the OFT by the `updateRebaseInfo` function. This ideally should be called by a piece of decentralized and secure off-chain architecture, such as EigenLayer AVS. We did not have the time to implement this piece of architecture.
 
-## Usage
+Deployment addresses:
 
-### Build
+`stETHAdapter`: `0x19180d8aF15dd42a868840d9A31A09Ed98711422` (Ethereum Sepolia Testnet)    
 
-```shell
-$ forge build
-```
+`RstETHOFT`: `0x5F1A2810eDa7B75A8934Ae15b1c0ADcDAE315bc3` (Base Sepolia Testnet)
 
-### Test
+## Scroll:
+On Scroll we used the `L1SLOAD` feature to cheaply and instantly access L1 state, and thus get real time balance updates from the mainnet `stETH` to the Scroll Devnet deployed rstETH`. This use case is specific to `L1SLOAD` and could not have been possible on any other chain or technology.   
 
-```shell
-$ forge test
-```
+For the cross-chain (L1 - L2) messaging we utilized the ScrollMessenger to pass `stETH` token bridging information from Scroll to L1 and vice versa.
 
-### Format
+Deployment addresses:
 
-```shell
-$ forge fmt
-```
+`ScrollStETHBridge`; `0x2b819A18d532456F273d59Ed4788d97b52fa6375` (Ethereum Sepolia Testnet)   
 
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+`ScrollRstETH`: `0xfbB5eb88a4C99ae2C5b84184C84460f172f0eC06` (Scroll Devnet)   

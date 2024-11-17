@@ -42,8 +42,6 @@ contract RstETH is OAppRead, IRstETH {
     uint256 public lastTotalShares;
     uint256 public lastUpdateTimestamp;
 
-    // --constructor-args "0x6EDCE65403992e310A62460808c4b910D972f10f" "0x1c46D242755040a0032505fD33C6e8b83293a332" "0xFe98dAA1947e23108d86d375316E890080e18f24"
-
     constructor(address _endpoint, address _delegate, address _stETH)
         OAppRead(_endpoint, _delegate)
         Ownable(_delegate)
