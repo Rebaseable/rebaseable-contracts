@@ -5,7 +5,7 @@ import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {OFT} from "@layerzerolabs/oft-evm/contracts/OFT.sol";
 
 /// @notice OFT is an ERC-20 token that extends the OFTCore contract.
-contract MyOFT is OFT {
+contract RstETHOFT is OFT {
     uint256 public lastTotalSupply;
     uint256 public lastTotalShares;
     uint256 public lastUpdateTimestamp;

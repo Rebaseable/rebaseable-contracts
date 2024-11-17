@@ -3,12 +3,13 @@ pragma solidity ^0.8.22;
 
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {ScrollMessenger} from "./ScrollStETHBridge.sol";
+import {IScrollRstETH} from "./ScrollStETHBridge.sol";
 
 interface IStETHAdapter {
     function payOutRstETH(bytes memory encodedMsg) external;
 }
 
-contract ScrollRstETH is ERC20 {
+contract ScrollRstETH is ERC20, IScrollRstETH {
     bytes32 internal constant TOTAL_SHARES_POSITION = 0xe3b4b636e601189b5f4c6742edf2538ac12bb61ed03e6da26949d69838fa447e; // keccak256("lido.StETH.totalShares")
     bytes32 internal constant BUFFERED_ETHER_POSITION =
         0xed310af23f61f96daefbcd140b306c0bdbf8c178398299741687b90e794772b0; // keccak256("lido.Lido.bufferedEther");
@@ -28,8 +29,7 @@ contract ScrollRstETH is ERC20 {
 
     IStETHAdapter public stETHAdapter;
 
-    uint256 constant MSG_VAL = 1000000000000000;
-    uint256 constant GAS_LIMIT = 2000000;
+    uint256 GAS_LIMIT = 1000000;
 
     mapping(address => uint256) public sharesPerUser;
 
@@ -45,9 +45,18 @@ contract ScrollRstETH is ERC20 {
         _;
     }
 
-    constructor(address _stETHAddress, IStETHAdapter _stETHAdapter) ERC20("Rebaseable Staked Ether", "rstETH") {
+    constructor(address _stETHAddress, IStETHAdapter _stETHAdapter, ScrollMessenger _scrollMessenger ) ERC20("Rebaseable Staked Ether", "rstETH") {
         stETHAddress = _stETHAddress;
         stETHAdapter = _stETHAdapter;
+        scrollMessenger = _scrollMessenger;
+    }
+
+    function setScrollMessenger(ScrollMessenger _scrollMessenger) external  {
+        scrollMessenger = _scrollMessenger;
+    }
+
+    function setGasLimit(uint256 _gasLimit) external  {
+        GAS_LIMIT = _gasLimit;
     }
 
     function receiveRstETH(bytes memory encodedMsg) external {
@@ -66,15 +75,16 @@ contract ScrollRstETH is ERC20 {
         bytes memory encodedMsg = abi.encode(bridgeMsg);
 
         scrollMessenger.sendMessage{value: msg.value}(
-            address(stETHAdapter), MSG_VAL, abi.encodeWithSelector(IStETHAdapter.payOutRstETH.selector, encodedMsg), GAS_LIMIT
+            address(stETHAdapter), 0, abi.encodeWithSelector(IStETHAdapter.payOutRstETH.selector, encodedMsg), GAS_LIMIT
         );
     }
 
     function getPooledEthByShares(uint256 _sharesAmount) public view returns (uint256) {
+        if (getValForPosition(TOTAL_SHARES_POSITION) == 0) return 0;
         return (_sharesAmount * getTotalPooledEther()) / getValForPosition(TOTAL_SHARES_POSITION);
     }
 
-    function getValForPosition(bytes32 _position) internal view returns (uint256) {
+    function getValForPosition(bytes32 _position) public view returns (uint256) {
         (bool success, bytes memory returnValue) =
             L1_SLOAD_ADDRESS.staticcall(abi.encodePacked(stETHAddress, _position));
         if (!success) {
@@ -99,6 +109,14 @@ contract ScrollRstETH is ERC20 {
     }
 
     function getSharesByEth(uint256 _eth) public view returns (uint256) {
+        if (getTotalPooledEther() == 0) return _eth;
         return (_eth * getValForPosition(TOTAL_SHARES_POSITION)) / getTotalPooledEther();
     }
+
+    function withdraw() external {
+        (bool success, ) = msg.sender.call{value: address(this).balance}("");
+        require(success);
+    }
+
+    receive() external payable { }
 }

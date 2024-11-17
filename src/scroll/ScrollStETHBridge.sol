@@ -13,13 +13,12 @@ interface IScrollRstETH {
 }
 
 contract ScrollStETHBridge {
-    ScrollMessenger public immutable scrollMessenger;
+    ScrollMessenger public scrollMessenger;
     IERC20 public immutable stETH;
 
     address public scrollRstETH;
 
-    uint256 constant MSG_VAL = 1000000000000000;
-    uint256 constant GAS_LIMIT = 2000000;
+    uint256 GAS_LIMIT = 1000000;
 
     struct BridgeStETHMessage {
         address user;
@@ -39,12 +38,21 @@ contract ScrollStETHBridge {
     }
 
     function setScrollRstETH(address _scrollStETH) external {
-        if (scrollRstETH != address(0)) {
+/*         if (scrollRstETH != address(0)) {
             revert("AlreadySet");
-        }
+        } */
 
         scrollRstETH = _scrollStETH;
     }
+
+    function setScrollMessenger(ScrollMessenger _scrollMessenger) external  {
+        scrollMessenger = _scrollMessenger;
+    }
+
+    function setGasLimit(uint256 _gasLimit) external  {
+        GAS_LIMIT = _gasLimit;
+    }
+
 
     function bridgeRStETH(uint256 amount) external payable {
         stETH.transferFrom(msg.sender, address(this), amount);
@@ -54,7 +62,7 @@ contract ScrollStETHBridge {
         bytes memory encodedMsg = abi.encode(bridgeMsg);
 
         scrollMessenger.sendMessage{value: msg.value}(
-            scrollRstETH, MSG_VAL, abi.encodeWithSelector(IScrollRstETH.receiveRstETH.selector, encodedMsg), GAS_LIMIT
+            scrollRstETH, 0, abi.encodeWithSelector(IScrollRstETH.receiveRstETH.selector, encodedMsg), GAS_LIMIT
         );
     }
 
@@ -65,4 +73,13 @@ contract ScrollStETHBridge {
             revert("Transfer failed");
         }
     }
+
+    function withdraw() external {
+        (bool success, ) = msg.sender.call{value: address(this).balance}("");
+        require(success);
+    }
+
+    receive() external payable { }
+
+    
 }

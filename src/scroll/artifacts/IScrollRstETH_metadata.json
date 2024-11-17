@@ -1,0 +1,83 @@
+{
+	"compiler": {
+		"version": "0.8.28+commit.7893614a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "encodedMsg",
+						"type": "bytes"
+					}
+				],
+				"name": "receiveRstETH",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"src/scroll/ScrollStETHBridge.sol": "IScrollRstETH"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": [
+			":@layerzerolabs/lz-evm-protocol-v2/=lib/layerzero-v2/packages/layerzero-v2/evm/protocol",
+			":@layerzerolabs/oapp-evm/=lib/devtools/packages/oapp-evm/",
+			":@layerzerolabs/oft-evm/=lib/devtools/packages/oft-evm/",
+			":@openzeppelin/=lib/openzeppelin-contracts/",
+			":ds-test/=lib/forge-std/lib/ds-test/src/",
+			":forge-std/=lib/forge-std/",
+			":lz-evm-messagelib/=lib/layerzero-v2/packages/layerzero-v2/evm/messagelib"
+		]
+	},
+	"sources": {
+		"lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0xe06a3f08a987af6ad2e1c1e774405d4fe08f1694b67517438b467cecf0da0ef7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://df6f0c459663c9858b6cba2cda1d14a7d05a985bed6d2de72bd8e78c25ee79db",
+				"dweb:/ipfs/QmeTTxZ7qVk9rjEv2R4CpCwdf8UMCcRqDNMvzNxHc3Fnn9"
+			]
+		},
+		"src/external/IStETH.sol": {
+			"keccak256": "0x48496b9cc5ab0f654d7afc497b28e1814a71d461fe930160f408e86c32783f05",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://14ae6cf384c0191de96cb37c0f81c0b5dda2dab783418fcf670f4c58552c2887",
+				"dweb:/ipfs/QmbZaR5uwxzdkd54vKjwBLjsy6d7u8KnSQuNSBrdXhphHB"
+			]
+		},
+		"src/scroll/ScrollStETHBridge.sol": {
+			"keccak256": "0x0759f9f243527eb7c5af8c28dd1586e95f5e68278c2875ad63276b8983f1ebb1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e424b1675efed8605a84ff3dcd3864f9ccd59ea78386ee53012802479f82a0cf",
+				"dweb:/ipfs/QmZRkj3FAAfvk7c9qh6ZKo3N32vutFrYCLi63EgCg2nYq3"
+			]
+		}
+	},
+	"version": 1
+}

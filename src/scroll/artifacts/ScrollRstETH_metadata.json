@@ -6,7 +6,23 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_stETHAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "contract IStETHAdapter",
+						"name": "_stETHAdapter",
+						"type": "address"
+					},
+					{
+						"internalType": "contract ScrollMessenger",
+						"name": "_scrollMessenger",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -198,7 +214,7 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_account",
+						"name": "account",
 						"type": "address"
 					}
 				],
@@ -230,19 +246,6 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_rewardAmount",
-						"type": "uint256"
-					}
-				],
-				"name": "distributeRewards",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
 						"name": "_sharesAmount",
 						"type": "uint256"
 					}
@@ -262,11 +265,11 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_ethAmount",
+						"name": "_eth",
 						"type": "uint256"
 					}
 				],
-				"name": "getSharesByPooledEth",
+				"name": "getSharesByEth",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -279,7 +282,26 @@
 			},
 			{
 				"inputs": [],
-				"name": "getTotalShares",
+				"name": "getTotalPooledEther",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_position",
+						"type": "bytes32"
+					}
+				],
+				"name": "getValForPosition",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -306,12 +328,77 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "_account",
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "payoutRstETH",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "encodedMsg",
+						"type": "bytes"
+					}
+				],
+				"name": "receiveRstETH",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "scrollMessenger",
+				"outputs": [
+					{
+						"internalType": "contract ScrollMessenger",
+						"name": "",
 						"type": "address"
 					}
 				],
-				"name": "sharesOf",
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_gasLimit",
+						"type": "uint256"
+					}
+				],
+				"name": "setGasLimit",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "contract ScrollMessenger",
+						"name": "_scrollMessenger",
+						"type": "address"
+					}
+				],
+				"name": "setScrollMessenger",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "sharesPerUser",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -324,9 +411,15 @@
 			},
 			{
 				"inputs": [],
-				"name": "submit",
-				"outputs": [],
-				"stateMutability": "payable",
+				"name": "stETHAdapter",
+				"outputs": [
+					{
+						"internalType": "contract IStETHAdapter",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -407,6 +500,17 @@
 				],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
 			}
 		],
 		"devdoc": {
@@ -480,6 +584,9 @@
 				"approve(address,uint256)": {
 					"details": "See {IERC20-approve}. NOTE: If `value` is the maximum `uint256`, the allowance is not updated on `transferFrom`. This is semantically equivalent to an infinite approval. Requirements: - `spender` cannot be the zero address."
 				},
+				"balanceOf(address)": {
+					"details": "See {IERC20-balanceOf}."
+				},
 				"decimals()": {
 					"details": "Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5.05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the default value returned by this function, unless it's overridden. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}."
 				},
@@ -509,7 +616,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"src/mocks/MockStETH.sol": "MockStETH"
+			"src/scroll/ScrollRstETH.sol": "ScrollRstETH"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -579,20 +686,20 @@
 				"dweb:/ipfs/QmbZaR5uwxzdkd54vKjwBLjsy6d7u8KnSQuNSBrdXhphHB"
 			]
 		},
-		"src/mocks/DummyStorage.sol": {
-			"keccak256": "0x7348a896a0bcf3644f8e47a6717a0e57a3064d1b876a2d35fa5d0d55174a6af3",
+		"src/scroll/ScrollRstETH.sol": {
+			"keccak256": "0x4126e7772e2219834bfa798529c2aafabe1c0008b8707ba3f0272ab914d978be",
 			"license": "UNLICENSED",
 			"urls": [
-				"bzz-raw://a815af462d682d25f43e05f6993bd944cfcfdc7c49e3892969667b0f0f684993",
-				"dweb:/ipfs/QmS5cqdtSaQEjT49QGTyKgRzALB53LQEwmffP3AYzTJP3y"
+				"bzz-raw://71f5670091014bff29b5555200c92509b36e6695b58ee8df4541060da369d680",
+				"dweb:/ipfs/Qme2anQGx68A6y5VqyChAtLmWwiEeJcG5y7MHaeEiFGQYf"
 			]
 		},
-		"src/mocks/MockStETH.sol": {
-			"keccak256": "0x63f87b11dd750e36af0786746d8a9fbd45e484a877628956e354d94f6338761a",
+		"src/scroll/ScrollStETHBridge.sol": {
+			"keccak256": "0x3e5566bac69d05dc5ebec1735d1ab244cc4d21652d45063fbcf062799f457938",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b214d182e0fb4afbeaad104c314af50a6c941806d9ecfd35f5377f9eae373d55",
-				"dweb:/ipfs/QmNzV175rWttk9u6b9fPBXaYxRfWzHP9RMp4fQk6jr5dVf"
+				"bzz-raw://68fd0bc459afa160e21f2db0219991d7a50670723d30ff8e5823446e2e39fa50",
+				"dweb:/ipfs/QmWCUvL93euM3wJbAnx8MFERrk8gAttgKGeL8wi4CtKLZG"
 			]
 		}
 	},
