@@ -7,6 +7,7 @@ remappings = [
     'forge-std/=lib/forge-std/',
     '@openzeppelin/=lib/openzeppelin-contracts/',
     '@layerzerolabs/oft-evm/=lib/devtools/packages/oft-evm/',
+    '@layerzerolabs/test-devtools-evm-foundry/=lib/devtools/packages/test-devtools-evm-foundry/',
     '@layerzerolabs/oapp-evm/=lib/devtools/packages/oapp-evm/',
     '@layerzerolabs/lz-evm-protocol-v2/=lib/layerzero-v2/packages/layerzero-v2/evm/protocol',
     'lz-evm-messagelib/=lib/layerzero-v2/packages/layerzero-v2/evm/messagelib',
